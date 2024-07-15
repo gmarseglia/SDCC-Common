@@ -10,7 +10,7 @@ import (
 	"strconv"
 	"time"
 
-	pb "common/proto"
+	pb "github.com/gmarseglia/SDCC-Common/proto"
 )
 
 const Step = 25

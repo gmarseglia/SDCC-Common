@@ -1,4 +1,4 @@
-module common
+module github.com/gmarseglia/SDCC-Common
 
 go 1.21.5
 
