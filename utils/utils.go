@@ -1,6 +1,7 @@
 package utils
 
 import (
+	"bufio"
 	"fmt"
 	"log"
 	"math"
@@ -8,6 +9,7 @@ import (
 	"net"
 	"os"
 	"strconv"
+	"strings"
 	"time"
 
 	pb "github.com/gmarseglia/SDCC-Common/proto"
@@ -164,5 +166,31 @@ func GenerateMatrix(height int, width int, random bool, value float32) [][]float
 			}
 		}
 	}
+	return result
+}
+
+func ManualInputMatrix(name string, targetSize int) [][]float32 {
+	reader := bufio.NewReader(os.Stdin)
+	var done bool = false
+
+	fmt.Printf("Enter values for %s: \n", name)
+
+	result := make([][]float32, targetSize)
+	for i := 0; i < targetSize; i++ {
+		result[i] = make([]float32, targetSize)
+		for j := 0; j < targetSize; j++ {
+			done = false
+			for !done {
+				fmt.Printf("Enter value at %d, %d: ", i, j)
+				text, _ := reader.ReadString('\n')
+				value, err := strconv.ParseFloat(strings.TrimSpace(text), 32)
+				if err == nil {
+					result[i][j] = float32(value)
+					done = true
+				}
+			}
+		}
+	}
+
 	return result
 }
